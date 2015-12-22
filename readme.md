@@ -6,7 +6,7 @@ This is a web-based accounting system for A-1 Driving School Inc. (Philippines) 
 ## Proponents
 
 * [Raymond Barrato](https://www.facebook.com/Almooonde)
-* [Liam Demafelix](http://simplyliam.com/)\
+* [Liam Demafelix](http://simplyliam.com/)
 * [Prince Juliano](https://www.facebook.com/prince.juliano)
 * [Lence Lor](https://www.facebook.com/lencemanfred.lor)
 
