@@ -1,27 +1,23 @@
-## Laravel PHP Framework
+## A-1 Driving School
+### Web-based Accounting System
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+This is a web-based accounting system for A-1 Driving School Inc. (Philippines) in partial fulfillment of the requirements of the Bachelor's Degree in Information Technology at the University of the East - Manila.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+## Proponents
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+* [Raymond Barrato](https://www.facebook.com/Almooonde)
+* [Liam Demafelix](http://simplyliam.com/)\
+* [Prince Juliano](https://www.facebook.com/prince.juliano)
+* [Lence Lor](https://www.facebook.com/lencemanfred.lor)
 
-## Official Documentation
+## Installation
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+Clone this repo **outside** the document root and run `composer install` to fetch the dependencies.
 
-## Contributing
+## Documentation
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+Documentation can be found in the [Facebook Group](https://www.facebook.com/groups/1665772333656337/).
 
-## Security Vulnerabilities
+## License
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-### License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+This is **proprietary** software.
