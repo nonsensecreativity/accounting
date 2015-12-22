@@ -85,9 +85,9 @@ class HomeController extends CommonController
 
         // Was the contact number filled up?
         $contactChange = false;
-        if (!empty($request->contact_no)) {
+        if (!empty($request->contact)) {
             $this->validate($request, [
-                'contact_no'        =>      'required|string'
+                'contact'        =>      'required|string'
             ]);
             $contactChange = true;
         }
