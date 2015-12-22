@@ -1,5 +1,6 @@
 <?php
 
+use App\Permissions;
 use Illuminate\Database\Seeder;
 
 class PermissionSeeder extends Seeder
@@ -11,12 +12,16 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('permissions')
-            ->insert([
-                'name'      =>      'Default',
-                'accounting'=>      true,
-                'reports'   =>      true,
-                'system'    =>      true
-            ]);
+        $data = [
+            'name'      =>      'Default',
+            'accounting'=>      true,
+            'reports'   =>      true,
+            'system'    =>      true
+        ];
+        $perm = new Permissions;
+        foreach ($data as $column => $value) {
+            $perm->$column = $value;
+        }
+        $perm->save();
     }
 }

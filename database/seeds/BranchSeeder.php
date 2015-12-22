@@ -1,5 +1,6 @@
 <?php
 
+use App\Branches;
 use Illuminate\Database\Seeder;
 
 class BranchSeeder extends Seeder
@@ -11,9 +12,9 @@ class BranchSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('branches')->insert([
-            'name'      =>      'Mandaluyong',
-            'address'   =>      'JRU Mandaluyong'
-        ]);
+        $branch = new Branches;
+        $branch->name = "Mandaluyong";
+        $branch->address = "JRU Mandaluyong";
+        $branch->save();
     }
 }
