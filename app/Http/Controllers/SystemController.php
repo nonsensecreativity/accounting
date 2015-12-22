@@ -110,6 +110,11 @@ class SystemController extends CommonController
             $request->session()->flash('error', 'Sorry, you are not allowed to suspend this user.');
             return redirect('/users');
         }
+        // You can't suspend yourself!
+        if ($id == Auth::user()['id']) {
+            $request->session()->flash('error', 'You can\'t suspend yourself.');
+            return redirect('/users');
+        }
         User::findOrFail($id)->delete();
 
         $request->session()->flash('success', 'User suspended.');
