@@ -21,13 +21,13 @@ class CreateUsersTable extends Migration
             $table->string('last_name');
             $table->text('address');
             $table->text('avatar')->nullable();
-            $table->boolean('active')->default(true);
             $table->text('contact');
             $table->text('notes')->nullable();
             $table->integer('branch');
             $table->boolean('branch_specific')->default(true);
             $table->integer('permission');
             $table->string('job');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

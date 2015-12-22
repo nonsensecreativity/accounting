@@ -62,12 +62,16 @@
                                         {{ $sysUser->updated_at }}
                                     </td>
                                     <td class="text-center">
-                                        @if ($sysUser->active) Active @else Suspended @endif
+                                        @if ($sysUser->deleted_at == null) Active @else Suspended @endif
                                     </td>
                                     <td class="text-center">
                                         <a href="{{ URL('/users/edit/' . $sysUser->id) }}" class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i> Edit</a>
                                         <a href="{{ URL('/users/reassign/' . $sysUser->id) }}" class="btn btn-warning reassign-btn"><i class="fa fa-lock fa-fw"></i> Reassign Permissions</a>
-                                        <a href="{{ URL('/users/suspend/' . $sysUser->id) }}" class="btn btn-danger"><i class="fa fa-ban fa-fw"></i> Suspend</a>
+                                        @if ($sysUser->deleted_at == null)
+                                            <a href="{{ URL('/users/suspend/' . $sysUser->id) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to suspend this user?');"><i class="fa fa-ban fa-fw"></i> Suspend</a>
+                                        @else
+                                            <a href="{{ URL('/users/unsuspend/' . $sysUser->id) }}" class="btn btn-success" onclick="return confirm('Are you sure you want to unsuspend this user?');"><i class="fa fa-unlock fa-fw"></i> Unsuspend</a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

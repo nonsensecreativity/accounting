@@ -17,7 +17,7 @@ Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 // Protected Routes
-Route::group(['middleware' => ['auth', 'suspension']], function() {
+Route::group(['middleware' => 'auth'], function() {
     // Home Section
     Route::get('/', 'HomeController@getIndex');
     Route::post('/notes', 'HomeController@postNotes');
@@ -33,6 +33,10 @@ Route::group(['middleware' => ['auth', 'suspension']], function() {
     Route::get('/users', 'SystemController@getUsers');
     Route::get('/users/new', 'SystemController@newUser');
     Route::post('/users/new/save', 'SystemController@addUser');
+    Route::get('/users/edit/{id}', 'SystemController@editUser')->where('id', '[0-9]+');
+    Route::post('/users/edit/save', 'SystemController@saveEditedUser');
+    Route::get('/users/suspend/{id}', 'SystemController@suspendUser')->where('id', '[0-9]+');
+    Route::get('/users/unsuspend/{id}', 'SystemController@unsuspendUser')->where('id', '[0-9]+');
     Route::get('/perms', 'SystemController@getPerms');
     Route::post('/perms/save', 'SystemController@postPerms');
 });

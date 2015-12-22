@@ -28,7 +28,6 @@ class SystemController extends CommonController
             ->join('branches', 'branches.id', '=', 'users.branch')
             ->join('permissions', 'permissions.id', '=', 'users.permission')
             ->select('users.*', 'branches.name as branch_name', 'permissions.name as permission_name')
-            ->where('active', true)
             ->paginate(10);
         return $this->view('system.users', ['users' => $users]);
     }
@@ -95,6 +94,54 @@ class SystemController extends CommonController
         $addUser->save();
         $request->session()->flash('success', 'User ' . $request->email . ' added successfully.');
         return redirect('/users');
+    }
+
+    /**
+     * Suspends a user.
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function suspendUser(Request $request, $id)
+    {
+        // Can't suspend user ID 1!
+        if ($id == 1) {
+            $request->session()->flash('error', 'Sorry, you are not allowed to suspend this user.');
+            return redirect('/users');
+        }
+        User::findOrFail($id)->delete();
+
+        $request->session()->flash('success', 'User suspended.');
+        return redirect('/users');
+    }
+
+    /**
+     * Unsuspends a user.
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function unsuspendUser(Request $request, $id)
+    {
+        User::withTrashed()->find($id)->restore();
+        $request->session()->flash('success', 'User activated.');
+        return redirect('/users');
+    }
+
+    /**
+     * Edit user page.
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function editUser($id)
+    {
+        $permissions = Permissions::all();
+        $branches = Branches::all();
+        $editUser = User::findOrFail($id);
+        return $this->view('system.users-edit', ['id' => $id, 'permissions' => $permissions, 'branches' => $branches, 'editUser' => $editUser]);
     }
 
     /**
