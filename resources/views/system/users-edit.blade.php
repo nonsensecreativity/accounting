@@ -111,24 +111,6 @@
 @endsection
 
 @section('scripts')
-    <div id="branchSpecific" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><i class="fa fa-info-circle"></i> Branch-Specific Users</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Users that are <strong>branch-specific</strong> can only add, update or view records from their own branch. This is recommended for users whose branches are not the main office, or for users that have no authority to view records of branches other than their own.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
     <script src="{{ asset("/bower_components/ckeditor/ckeditor.js") }}" type="text/javascript"></script>
     <script>
         CKEDITOR.replace('ck', {
