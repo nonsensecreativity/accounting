@@ -21,7 +21,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="skin-red">
+<body class="skin-red fixed">
 <div class="wrapper">
     @include('partials.header')
     @include('partials.sidebar')
@@ -45,6 +45,7 @@
 
 <script src="{{ asset("/bower_components/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js") }}"></script>
 <script src="{{ asset("/bower_components/AdminLTE/bootstrap/js/bootstrap.min.js") }}" type="text/javascript"></script>
+<script src="{{ asset("/bower_components/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js") }}" type="text/javascript"></script>
 <script src="{{ asset("/bower_components/AdminLTE/dist/js/app.min.js") }}" type="text/javascript"></script>
 @yield('scripts')
 <script src="{{ asset("/js/system.js") }}" type="text/javascript"></script>

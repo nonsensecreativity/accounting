@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="contact_no">Contact Number <span class="text-muted">optional</span></label>
+                    <label for="contact">Contact Number <span class="text-muted">optional</span></label>
                     <input type="text" class="form-control" name="contact" id="contact" value="@if(empty(old('contact_no'))){{ $user->contact }}@else{{ old('contact_no') }}@endif" />
                 </div>
 

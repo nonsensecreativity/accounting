@@ -31,6 +31,8 @@ Route::group(['middleware' => ['auth', 'suspension']], function() {
 
     // System Section
     Route::get('/users', 'SystemController@getUsers');
+    Route::get('/users/new', 'SystemController@newUser');
+    Route::post('/users/new/save', 'SystemController@addUser');
     Route::get('/perms', 'SystemController@getPerms');
     Route::post('/perms/save', 'SystemController@postPerms');
 });

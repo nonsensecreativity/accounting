@@ -25,7 +25,9 @@
                                 <th>User Information</th>
                                 <th class="text-center">Branch</th>
                                 <th class="text-center">Permission Set</th>
+                                <th class="text-center">Branch-Specific? <sup><a href="#" data-toggle="modal" data-target="#branchSpecific"><i class="fa fa-info-circle"></i></a></sup></th>
                                 <th class="text-center">Registered On</th>
+                                <th class="text-center">Last Updated</th>
                                 <th class="text-center">Account Standing</th>
                                 <th class="text-center">Actions</th>
                             </tr>
@@ -51,14 +53,21 @@
                                         {{ $sysUser->permission_name }}
                                     </td>
                                     <td class="text-center">
+                                        <input type="checkbox" disabled @if ($sysUser->branch_specific) checked @endif />
+                                    </td>
+                                    <td class="text-center">
                                         {{ $sysUser->created_at }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $sysUser->updated_at }}
                                     </td>
                                     <td class="text-center">
                                         @if ($sysUser->active) Active @else Suspended @endif
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ URL('/users/reassign/' . $sysUser->id . '/') }}" class="btn btn-primary reassign-btn">Reassign Permissions</a>
-                                        <a href="{{ URL('/users/suspend/' . $sysUser->id) }}" class="btn btn-danger">Suspend</a>
+                                        <a href="{{ URL('/users/edit/' . $sysUser->id) }}" class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i> Edit</a>
+                                        <a href="{{ URL('/users/reassign/' . $sysUser->id) }}" class="btn btn-warning reassign-btn"><i class="fa fa-lock fa-fw"></i> Reassign Permissions</a>
+                                        <a href="{{ URL('/users/suspend/' . $sysUser->id) }}" class="btn btn-danger"><i class="fa fa-ban fa-fw"></i> Suspend</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -75,6 +84,24 @@
 @endsection
 
 @section('scripts')
+    <div id="branchSpecific" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><i class="fa fa-info-circle"></i> Branch-Specific Users</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Users that are <strong>branch-specific</strong> can only add, update or view records from their own branch. This is recommended for users whose branches are not the main office, or for users that have no authority to view records of branches other than their own.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <script src="{{ asset("/bower_components/ckeditor/ckeditor.js") }}" type="text/javascript"></script>
     <script>
         CKEDITOR.replace('ck', {
