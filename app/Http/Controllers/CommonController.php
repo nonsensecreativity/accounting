@@ -25,7 +25,7 @@ class CommonController extends Controller
         }
 
         // Get unread messages
-        $messages = \App\Messages::where('unread', true)->get();
+        $messages = \App\Messages::where('unread', true)->where('recipient', $user->id)->get();
         $unread = count($messages);
         $data = ['user' => $user];
         $data['unread'] = $unread;

@@ -151,7 +151,7 @@ class HomeController extends CommonController
             ->join('users', 'users.id', '=', 'messages.sender')
             ->select('messages.*', 'users.first_name as sender_fname', 'users.last_name as sender_lname', 'users.email as sender_email', 'users.avatar as sender_avatar')
             ->where('messages.recipient', $user->id)
-            ->whereNull('deleted_at')
+            ->whereNull('messages.deleted_at')
             ->orderBy('id', 'DESC')
             ->paginate(10);
 
