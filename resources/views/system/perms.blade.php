@@ -31,7 +31,7 @@
                             <tbody>
                             @foreach ($permissions as $permission)
                                 <tr>
-                                    <td>{{ $permission->name }}</td>
+                                    <td>{{ $permission->name }}<br /><span class="text-muted">{{ $permission->description }}</span></td>
                                     <td class="text-center"><input type="checkbox" name="accounting" disabled @if ($permission->accounting) checked @endif /></td>
                                     <td class="text-center"><input type="checkbox" name="reports" disabled @if ($permission->reports) checked @endif /></td>
                                     <td class="text-center"><input type="checkbox" name="system" disabled @if ($permission->system) checked @endif /></td>

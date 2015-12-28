@@ -16,6 +16,9 @@ Route::get('/auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
+// Continuous Integration Test
+Route::get('/ci', function() { return "CI successful."; });
+
 // Protected Routes
 Route::group(['middleware' => 'auth'], function() {
     // Home Section
