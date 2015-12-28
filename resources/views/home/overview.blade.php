@@ -3,6 +3,13 @@
 
 @section('content')
     <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-warning" role="alert">
+                <strong><i class="fa fa-info-circle fa-fw"></i> Important!</strong> This system will be reset on the next code commit. Avoid saving important information here.
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
                 <span class="info-box-icon bg-aqua"><i class="fa fa-car"></i></span>
