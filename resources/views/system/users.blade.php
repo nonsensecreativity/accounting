@@ -24,8 +24,6 @@
                                 <th style="width: 50px;"></th>
                                 <th>User Information</th>
                                 <th class="text-center">Branch</th>
-                                <th class="text-center">Permission Set</th>
-                                <th class="text-center">Branch-Specific? <sup><a href="#" data-toggle="modal" data-target="#branchSpecific"><i class="fa fa-info-circle"></i></a></sup></th>
                                 <th class="text-center">Registered On</th>
                                 <th class="text-center">Last Updated</th>
                                 <th class="text-center">Account Standing</th>
@@ -50,12 +48,6 @@
                                         {{ $sysUser->branch_name }}
                                     </td>
                                     <td class="text-center">
-                                        {{ $sysUser->permission_name }}
-                                    </td>
-                                    <td class="text-center">
-                                        <input type="checkbox" disabled @if ($sysUser->branch_specific) checked @endif />
-                                    </td>
-                                    <td class="text-center">
                                         {{ $sysUser->created_at }}
                                     </td>
                                     <td class="text-center">
@@ -66,7 +58,6 @@
                                     </td>
                                     <td class="text-center">
                                         <a href="{{ URL('/users/edit/' . $sysUser->id) }}" class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i> Edit</a>
-                                        <a href="{{ URL('/users/reassign/' . $sysUser->id) }}" class="btn btn-warning reassign-btn"><i class="fa fa-lock fa-fw"></i> Reassign Permissions</a>
                                         @if ($sysUser->deleted_at == null)
                                             <a href="{{ URL('/users/suspend/' . $sysUser->id) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to suspend this user?');"><i class="fa fa-ban fa-fw"></i> Suspend</a>
                                         @else

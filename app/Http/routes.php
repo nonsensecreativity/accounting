@@ -42,6 +42,4 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/users/unsuspend/{id}', 'SystemController@unsuspendUser')->where('id', '[0-9]+');
     Route::get('/users/reassign/{id}', 'SystemController@reassignUserView')->where('id', '[0-9]+');
     Route::post('/users/reassign/save', 'SystemController@reassignUserPost');
-    Route::get('/perms', 'SystemController@getPerms');
-    Route::post('/perms/save', 'SystemController@postPerms');
 });

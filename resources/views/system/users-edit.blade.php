@@ -32,28 +32,6 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
                             <div class="form-group">
-                                <label for="permission">Permission Set</label>
-                                <select id="permission" class="form-control" name="permission">
-                                    @foreach ($permissions as $permission)
-                                        <option value="{{ $permission->id }}" @if ($editUser->permission == $permission->id) selected @endif>{{ $permission->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <div class="form-group">
-                                <label for="branch_specific">Branch-Specific?</label>
-                                <select id="branch_specific" class="form-control" name="branch_specific">
-                                    <option value="0" @if (!$editUser->branch_specific) selected @endif>User can access records from all branches</option>
-                                    <option value="1" @if ($editUser->branch_specific) selected @endif>User can only access records from own branch</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <div class="form-group">
                                 <label for="branch">Branch</label>
                                 <select id="branch" class="form-control" name="branch">
                                     @foreach ($branches as $branch)

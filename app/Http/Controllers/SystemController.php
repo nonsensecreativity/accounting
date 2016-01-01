@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Branches;
 use App\Messages;
-use App\Permissions;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -26,8 +25,7 @@ class SystemController extends CommonController
         // Get a list of users
         $users = DB::table('users')
             ->join('branches', 'branches.id', '=', 'users.branch')
-            ->join('permissions', 'permissions.id', '=', 'users.permission')
-            ->select('users.*', 'branches.name as branch_name', 'permissions.name as permission_name')
+            ->select('users.*', 'branches.name as branch_name')
             ->paginate(10);
         return $this->view('system.users', ['users' => $users]);
     }
@@ -39,9 +37,8 @@ class SystemController extends CommonController
      */
     public function newUser()
     {
-        $permissions = Permissions::all();
         $branches = Branches::all();
-        return $this->view('system.users-new', ['permissions' => $permissions, 'branches' => $branches]);
+        return $this->view('system.users-new', ['branches' => $branches]);
     }
 
     /**
@@ -80,8 +77,6 @@ class SystemController extends CommonController
         $addUser = new User;
         $addUser->email = $request->email;
         $addUser->password = bcrypt($request->password);
-        $addUser->permission = $request->permission;
-        $addUser->branch_specific = $request->branch_specific;
         $addUser->branch = $request->branch;
         $addUser->job = $request->job;
         $addUser->first_name = $request->first_name;
@@ -148,10 +143,9 @@ class SystemController extends CommonController
             $request->session()->flash('success', 'You tried to edit your own profile. We redirected you instead to your own profile editor.');
             return redirect('/user');
         }
-        $permissions = Permissions::all();
         $branches = Branches::all();
         $editUser = User::findOrFail($id);
-        return $this->view('system.users-edit', ['id' => $id, 'permissions' => $permissions, 'branches' => $branches, 'editUser' => $editUser]);
+        return $this->view('system.users-edit', ['id' => $id, 'branches' => $branches, 'editUser' => $editUser]);
     }
 
     public function saveEditedUser(Request $request)
@@ -229,94 +223,5 @@ class SystemController extends CommonController
         }
     }
 
-    /**
-     * Show reassign view.
-     *
-     * @param Request $request
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
-     */
-    public function reassignUserView(Request $request, $id)
-    {
-        if ($id == 1) {
-            // You're not allowed to change the permission set of the super admin.
-            $request->session()->flash('error', 'You are not allowed to reassign the permissions of the super administrator.');
-            return redirect('/users');
-        }
-        if ($id == Auth::user()['id']) {
-            // You're not allowed to reassign your own permission set.
-            $request->session()->flash('error', 'You are not allowed to edit your own permission set.');
-            return redirect('/users');
-        }
-        $permissions = Permissions::all();
-        $reassignUser = User::findOrFail($id);
-        return $this->view('system.reassign', ['permissions' => $permissions, 'reassignUser' => $reassignUser]);
-    }
-
-    public function reassignUserPost(Request $request)
-    {
-        $id = $request->id;
-        if ($id == 1) {
-            // You're not allowed to change the permission set of the super admin.
-            $request->session()->flash('error', 'You are not allowed to reassign the permissions of the super administrator.');
-            return redirect('/users');
-        }
-        if ($id == Auth::user()['id']) {
-            // You're not allowed to reassign your own permission set.
-            $request->session()->flash('error', 'You are not allowed to edit your own permission set.');
-            return redirect('/users');
-        }
-
-        $user = User::findOrFail($id);
-        $user->permission = $request->permission;
-        $user->save();
-        $permission = Permissions::find($request->permission);
-        $request->session()->flash('success', 'User <strong>' . $user->email . '</strong> reassigned to permission <strong>' . $permission->name . '</strong>.');
-        return redirect('/users');
-    }
-
-    /**
-     * List Permissions
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function getPerms()
-    {
-        $permissions = Permissions::paginate(10);
-        return $this->view('system.perms', ['permissions' => $permissions]);
-    }
-
-    /**
-     * Save new permission set.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function postPerms(Request $request)
-    {
-        $accounting = false;
-        $reports = false;
-        $system = false;
-        if (!empty($request->accounting)) {
-            $accounting = true;
-        }
-        if (!empty($request->reports)) {
-            $reports = true;
-        }
-        if (!empty($request->system)) {
-            $system = true;
-        }
-
-        $perm = new Permissions; // Yes, this is wrong in the English sense.
-
-        $perm->name = $request->name;
-        $perm->accounting = $accounting;
-        $perm->reports = $reports;
-        $perm->system = $system;
-        $perm->save();
-
-        $request->session()->flash('success', 'Permission set created.');
-        return redirect('/perms');
-    }
 
 }

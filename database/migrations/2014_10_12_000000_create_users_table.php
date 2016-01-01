@@ -24,8 +24,6 @@ class CreateUsersTable extends Migration
             $table->text('contact');
             $table->text('notes')->nullable();
             $table->integer('branch');
-            $table->boolean('branch_specific')->default(true);
-            $table->integer('permission');
             $table->string('job');
             $table->softDeletes();
             $table->timestamps();
