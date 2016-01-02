@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Branches;
 use App\Messages;
+use App\Logs;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -221,6 +222,16 @@ class SystemController extends CommonController
             $request->session()->flash('success', 'User edited successfully.');
             return redirect('/users');
         }
+    }
+
+    public function getLogs()
+    {
+        // We can't use the Eloquent model here. Pagination + join statements make it impossible.
+        $logs = DB::table('logs')
+            ->join('users', 'users.id', '=', 'logs.user')
+            ->select('users.email', 'users.first_name', 'users.last_name', 'users.avatar', 'logs.*')
+            ->paginate(10);
+        return $this->view('system.logs', ['logs' => $logs]);
     }
 
 

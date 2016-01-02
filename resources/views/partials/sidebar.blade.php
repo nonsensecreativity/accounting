@@ -39,7 +39,7 @@
             <li class="header"><i class="fa fa-cogs fa-fw"></i> SYSTEM</li>
             <li class="settings"><a href="{{ URL('/settings') }}"><span><i class="fa fa-gear fa-fw"></i> System Settings</span></a></li>
             <li class="users"><a href="{{ URL('/users') }}"><span><i class="fa fa-users fa-fw"></i> User Management</span></a></li>
-            <li class="syslogs"><a href="{{ URL('/syslogs') }}"><span><i class="fa fa-list fa-fw"></i> System Logs</span></a></li>
+            <li class="logs"><a href="{{ URL('/logs') }}"><span><i class="fa fa-list fa-fw"></i> System Logs</span></a></li>
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
