@@ -34,4 +34,16 @@ class CommonController extends Controller
         }
         return view($view, $data);
     }
+
+    public function confirmUser($token, Request $request) {
+        $user = User::where('confirmation_code', $token)->firstOrFail();
+
+        if ($user->confirmation_code == $token) {
+            $user->confirmation_code = "";
+            $user->confirmed = true;
+            $user->save();
+            $request->session()->flash('success', 'Your e-mail has been confirmed. You may now sign in.');
+            return redirect('/auth/login');
+        }
+    }
 }

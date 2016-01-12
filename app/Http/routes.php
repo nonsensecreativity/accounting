@@ -19,8 +19,11 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 // Continuous Integration Test
 Route::get('/ci', function() { return "CI successful."; });
 
+// Verification Route
+Route::get('/verify/{token}', 'CommonController@confirmUser');
+
 // Protected Routes
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => ['auth', 'confirm']], function() {
     // Home Section
     Route::get('/', 'HomeController@getIndex');
     Route::post('/notes', 'HomeController@postNotes');

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 class SystemController extends CommonController
 {
@@ -87,8 +88,21 @@ class SystemController extends CommonController
         if ($avatarChange) {
             $addUser->avatar = '/' . $destinationPath . '/' . $fileName;
         }
+
+        // Generate a random confirmation code
+        $confirmation_code = str_random(30);
+        $addUser->confirmation_code = $confirmation_code;
+
         $addUser->save();
-        $request->session()->flash('success', 'User ' . $request->email . ' added successfully.');
+
+        // Send confirmation e-mail
+        Mail::send('emails.userconfirm', ['user' => $request, 'code' => $confirmation_code], function ($m) use ($request) {
+            $m->from('noreply@a-1driving.com', 'A-1 Driving - Accounting');
+
+            $m->to($request->email, $request->first_name . $request->last_name)->subject('Confirm your E-mail Address');
+        });
+
+        $request->session()->flash('success', 'User ' . $request->email . ' added successfully. The user needs to confirm his e-mail before being able to sign in.');
         return redirect('/users');
     }
 

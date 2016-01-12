@@ -25,6 +25,8 @@ class CreateUsersTable extends Migration
             $table->text('notes')->nullable();
             $table->integer('branch');
             $table->string('job');
+            $table->boolean('confirmed')->default(false);
+            $table->string('confirmation_code')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

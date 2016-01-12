@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
             'address'           =>      '25-I Callejon Rosas Street, Kapasigan, Pasig City',
             'contact'           =>      '09773257613',
             'branch'            =>      1,
+            'confirmed'         =>      true,
             'job'               =>      'Developer'
         ];
         $user = new User;

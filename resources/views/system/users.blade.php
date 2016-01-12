@@ -54,7 +54,7 @@
                                         {{ $sysUser->updated_at }}
                                     </td>
                                     <td class="text-center">
-                                        @if ($sysUser->deleted_at == null) Active @else Suspended @endif
+                                        @if ($sysUser->deleted_at == null) Active @else Suspended @endif @if(!$sysUser->confirmed) / Unconfirmed @endif
                                     </td>
                                     <td class="text-center">
                                         <a href="{{ URL('/users/edit/' . $sysUser->id) }}" class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i> Edit</a>
